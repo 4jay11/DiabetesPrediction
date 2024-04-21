@@ -6,9 +6,18 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from .serializers import DiabetesSerializer
 from rest_framework import status
+import os
+from django.conf import settings
+
+# Construct the absolute file path within the Docker container
+file_path = os.path.join(settings.BASE_DIR, 'diabetes.csv')
+
+# Load the dataset
+data = pd.read_csv(file_path)
 
 # Load the dataset and train the model
-data = pd.read_csv("E:/MLP/Diabetes/Model/diabetes dataset.csv")  # Update with your file path
+#
+# data = pd.read_csv("E:/MLP/Diabetes/diabetes.csv")  # Update with your file path
 x = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 model = DecisionTreeClassifier()
